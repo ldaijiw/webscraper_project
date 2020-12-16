@@ -3,4 +3,6 @@ venv/
 .idea
 .pytest_cache
 __pycache__/
-.vscode/
+/.vscode/
+/.vagrant/
+*.log
