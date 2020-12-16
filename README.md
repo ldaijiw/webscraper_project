@@ -27,8 +27,12 @@ The Vagrantfile has been configured to set up the VM as follows:
 
 - To start the VM: ``vagrant up``
 - To SSH into the VM: ``vagrant ssh``
-- Ensure everything is in working order:
+- Ensure everything is in working order, all tests should pass after:
 ```
 cd app_code/
 python3 -m pytest tests/
 ```
+- Temporarily stop the VM: ``vagrant halt``
+- Permanently destroy the VM instance: ``vagrant destroy``
+
+
