@@ -1,0 +1,58 @@
+---
+
+- hosts: localhost
+  connection: local0
+  gather_facts: true
+  become: true
+
+  vars:
+    key_name: eng74_leo_aws_key
+    region: eu-west-1
+    image: ami-0dc8d444ee2a42d8a
+    id: "Leo Ansible EC2"
+    security_group: sg-09daa57de1874642a
+    subnet_id: subnet-0250d711013c54479
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Installing dependencies
+      apt:
+        name:
+          - python3
+          - python3-pip
+          - python-pip
+        state: present
+
+    - name: Installing pip dependencies
+      pip:
+        name:
+          - boto
+          - boto3
+          - nose
+          - tornado
+          - awscli
+        state: present
+
+    - name: get instance facts
+      ec2_instance_info:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ region }}"
+      register: result
+
+    - name: create EC2 instance
+      ec2:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        assign_public_ip: true
+        key_name: "{{ key_name }}"
+        id: "{{ id }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+        group_id: "{{ security_group }}"
+        image: "{{ image }}"
+        instance_type: t2.micro
+        region: "{{ region }}"
+        wait: true
+        count: 1
+        instance_tags:
+          Name: eng74-leo-ansible-ec2
