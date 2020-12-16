@@ -1,4 +1,4 @@
-app_code/venv/
+venv/
 /.pytest_cache/
 .idea
 .pytest_cache
