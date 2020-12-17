@@ -6,8 +6,8 @@ read access_key
 echo "Enter AWS secret key for Ansible to use to connect to VPC:"
 read secret_key
 
-echo $access_key >> aws_keys.yml
-echo $secret_key >> aws_keys.yml 
+echo aws_access_key: $access_key >> aws_keys.yml
+echo aws_secret_key: $secret_key >> aws_keys.yml 
 
 ansible-vault encrypt aws_keys.yml
 

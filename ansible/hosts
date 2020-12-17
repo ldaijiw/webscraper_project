@@ -1,0 +1,7 @@
+all:
+  hosts:
+    testhost:
+      ansible_host: PRIVATE IP HERE
+
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/eng74_leo_aws_key.pem

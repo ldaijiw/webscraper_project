@@ -15,6 +15,9 @@ scp -i ~/.ssh/eng74_leo_aws_key.pem -r ansible/playbooks/ ubuntu@$ip_addr:/home/
 # copy ansible config file
 scp -i ~/.ssh/eng74_leo_aws_key.pem ansible/ansible.cfg ubuntu@$ip_addr:/home/ubuntu/
 
+# copy hosts file
+scp -i ~/.ssh/eng74_leo_aws_key.pem ansible/hosts ubuntu@$ip_addr:/home/ubuntu/
+
 # copy app_code folder
 scp -i ~/.ssh/eng74_leo_aws_key.pem -r app_code/ ubuntu@$ip_addr:/home/ubuntu/
 
@@ -39,6 +42,7 @@ pip3 install boto3
 sudo chmod 400 ~/.ssh/eng74_leo_aws_key.pem
 
 sudo mv ansible.cfg /etc/ansible/
+sudo mv hosts /etc/ansible/
 
 EOF
 

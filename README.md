@@ -35,4 +35,8 @@ python3 -m pytest tests/
 - Temporarily stop the VM: ``vagrant halt``
 - Permanently destroy the VM instance: ``vagrant destroy``
 
+## Virtual Private Cloud
+
+A VPC has been set up on AWS with a public subnet for the EC2 instance to exist in. Internet access (HTTP and HTTPS) has been granted to the public subnet
+
 

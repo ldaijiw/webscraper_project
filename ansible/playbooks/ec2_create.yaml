@@ -10,7 +10,7 @@
     region: eu-west-1
     image: ami-0dc8d444ee2a42d8a
     id: "Leo Ansible EC2"
-    security_group: sg-09daa57de1874642a
+    security_group: sg-079e4d7e743cbd7c8
     subnet_id: subnet-0250d711013c54479
     ansible_python_interpreter: /usr/bin/python3
 
@@ -55,4 +55,4 @@
         wait: true
         count: 1
         instance_tags:
-          Name: eng74-leo-ansible-ec2
+          Name: eng74-leo-scraper-ec2
