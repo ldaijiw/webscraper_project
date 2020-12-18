@@ -1,15 +1,15 @@
 ---
 
 - hosts: localhost
-  connection: local0
-  gather_facts: true
+  connection: local
+  gather_facts: False
   become: true
 
   vars:
     key_name: eng74_leo_aws_key
     region: eu-west-1
     image: ami-0dc8d444ee2a42d8a
-    id: "Leo Ansible EC2"
+    id: "leo-webscraper-EC2-1037"
     security_group: sg-079e4d7e743cbd7c8
     subnet_id: subnet-0250d711013c54479
     ansible_python_interpreter: /usr/bin/python3
@@ -33,13 +33,6 @@
           - awscli
         state: present
 
-    - name: get instance facts
-      ec2_instance_info:
-        aws_access_key: "{{ aws_access_key }}"
-        aws_secret_key: "{{ aws_secret_key }}"
-        region: "{{ region }}"
-      register: result
-
     - name: create EC2 instance
       ec2:
         aws_access_key: "{{ aws_access_key }}"
@@ -56,3 +49,14 @@
         count: 1
         instance_tags:
           Name: eng74-leo-scraper-ec2
+          Env: development
+      register: new_ec2
+
+    - name: Add new ec2 to hosts list
+      lineinfile:
+        path: /etc/ansible/hosts
+        insertafter: "{{ item.tags.Env }}"
+        line: "{{ item.private_ip }}"
+        firstmatch: yes
+      with_items: "{{ new_ec2.instances }}"
+      become_user: root

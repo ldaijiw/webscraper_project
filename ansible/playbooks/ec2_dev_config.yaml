@@ -1,0 +1,35 @@
+---
+
+- name: Configure Dev Environment
+  hosts: development
+  gather_facts: yes
+  become: true
+
+  tasks:
+  - name: Update apt
+    apt:
+      update_cache: yes
+      force_apt_get: yes
+  
+  - name: Copy app_code folder
+    copy:
+      src: /home/ubuntu/app_code
+      dest: /home/ubuntu
+
+
+  - name: Install Python3
+    apt:
+      name:
+        - python3
+        - python3-pip
+      state: present
+  
+  - name: Install packages from requirements
+    pip:
+      requirements: /home/ubuntu/app_code/requirements.txt
+
+  - name: Create Downloads folder
+    file:
+      path: /home/ubuntu/Downloads
+      state: directory
+      mode: '755'

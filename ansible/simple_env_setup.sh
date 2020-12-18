@@ -25,7 +25,7 @@ pip3 install -r /home/ubuntu/app_code/requirements.txt
 
 # create Downloads folder for CSVs to be saved to with necessary permissions
 sudo mkdir /home/ubuntu/Downloads
-sudo chmod 777 /home/ubuntu/Downloads
+sudo chmod 755 /home/ubuntu/Downloads
 
 EOF
 
